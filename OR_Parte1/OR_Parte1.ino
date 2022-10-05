@@ -11,6 +11,7 @@ Angulos ang;
 // Mueve los servos según los ángulos indicados en la estructura "ang".
 void mover(Angulos ang)
 {
+  ang.b = map(ang.b, 0, 180, 0, 145);
   servo_base.write(ang.a);
   servo_hombro.write(ang.b);
 }

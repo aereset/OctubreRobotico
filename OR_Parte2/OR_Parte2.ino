@@ -11,6 +11,7 @@ Angulos ang;
 // Mueve los servos según los ángulos indicados en la estructura "ang".
 void mover(Angulos ang)
 {
+  ang.b = map(ang.b, 0, 180, 0, 145);
   servo_base.write(ang.a);
   servo_hombro.write(ang.b);
 }
@@ -61,147 +62,22 @@ void setup()
 void loop()
 {
 
-//PUNTO INICIAL (0, 0)
-  ang.a = 0;
-  ang.b = 0;
-  bool apertura_garra = true;
+//En esta segunda parte, vamos a programar el brazo para que haga un simple PICK&PLACE
 
-  coord = cinematica_directa(ang);
+//PICK&PLACE, como su nombre indica, coge un objeto en un punto, y lo deja en otro. Este ciclo
+//se repite indefinidamente
 
-  garra(apertura_garra);
-  mover(ang);
+//Elegiremos para los puntos de pick y de place los puntos (90, 0) y (0, 0), respectivamente
+//Podeis hacer todas las florituras que querais con el brazo, sed creativos!
 
-  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+//No os olvideis de los delays entre movimientos, que los movimientos no son instantaneos!!
+
+/* PROGRAMAR DESDE AQUÍ...*/
+
+
   
-  delay(2000);
+/* ...HASTA AQUÍ*/
 
-//PUNTO 1 (0, 90)
-
-  ang.a = 0;
-  ang.b = 90;
-  apertura_garra = true;
-
-  coord = cinematica_directa(ang);
-
-  garra(apertura_garra);
-  mover(ang);
-
-  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
-  
-  delay(2000);
-
-//PUNTO 3 (90, 90)
-
-  ang.a = 90;
-  ang.b = 90;
-  apertura_garra = true;
-
-  coord = cinematica_directa(ang);
-
-  garra(apertura_garra);
-  mover(ang);
-
-  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
-  
-  delay(2000);
-
-//CERRAMOS GARRA
-
-  apertura_garra = false;
-
-  garra(apertura_garra);
-
-  delay(4000);
-
-//PUNTO 4 (90, 0)
-
-  ang.a = 90;
-  ang.b = 0;
-  apertura_garra = false;
-
-  coord = cinematica_directa(ang);
-
-  garra(apertura_garra);
-  mover(ang);
-
-  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
-  
-  delay(2000);
-
-//PUNTO 5 (0,0)
-
-  ang.a = 0;
-  ang.b = 0;
-  apertura_garra = false;
-
-  coord = cinematica_directa(ang);
-
-  garra(apertura_garra);
-  mover(ang);
-
-  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
-  
-  delay(2000);
-
-//PUNTO 6 (0, 180)
-
-  ang.a = 0;
-  ang.b = 180;
-  apertura_garra = false;
-
-  coord = cinematica_directa(ang);
-
-  garra(apertura_garra);
-  mover(ang);
-
-  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
-  
-  delay(2000);
-
-//PUNTO 7 (180, 180)
-
-  ang.a = 180;
-  ang.b = 180;
-  apertura_garra = false;
-
-  coord = cinematica_directa(ang);
-
-  garra(apertura_garra);
-  mover(ang);
-
-  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
-  
-  delay(2000);
-
-//ABRIMOS GARRA
-
-  apertura_garra = true;
-
-  garra(apertura_garra);
-
-  delay(4000);
-
-//PUNTO FINAL (0, 0)
-
-  ang.a = 0;
-  ang.b = 0;
-  apertura_garra = true;
-
-  coord = cinematica_directa(ang);
-
-  garra(apertura_garra);
-  mover(ang);
-
-  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
-  
-  delay(5000);
-
-
-
-
-
-
- //  Serial.print("Coordenadas actuales: " , coord.x , ", " , coord.y , ", " , coord.z);
-  
+delay(3000);
 
 }
