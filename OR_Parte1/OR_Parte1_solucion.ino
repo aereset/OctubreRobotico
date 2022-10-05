@@ -29,26 +29,11 @@ void garra(bool c)
 // Calcula la posición X,Y,Z del extremo del robot según la posición
 // de las articulaciones del robot.
 Coordenadas cinematica_directa(Angulos ang)
-{  
-  // INSTRUCCIONES:
-  //    - La variable "coord" tiene tres elementos: x, y ,z.
-  //    - Lo que debes hacer es implementar las ecuaciones de la cinemática
-  //      directa que aparecen en las diapositivas.
-  //    - Para ello, sólo debes asignar valor a las variables x, y, z de la estructura "coord".
-  //    - Para darles valor solo tienes que hacer:
-  //        coord.x = loquesea;
-  //        coord.y = loquesea;
-  //        coord.z = loquesea;
-  //
-  
+{
   Coordenadas coord;
-  
-  /* PROGRAMAR DESDE AQUÍ...*/
-
-
-  
-  /* ...HASTA AQUÍ*/
-  
+  coord.x = L2 * cos(DEG2RAD * ang.b)*cos(DEG2RAD * ang.a);
+  coord.y = L2 * cos(DEG2RAD * ang.b)*sin(DEG2RAD * ang.a);
+  coord.z = L1 + L2 * sin(DEG2RAD * ang.b);
   return coord;
 }
 
@@ -56,25 +41,10 @@ Coordenadas cinematica_directa(Angulos ang)
 // Calcula los ángulos que hay que girar las articulaciones para llegar
 // a una determinada posición X,Y,Z.
 Angulos cinematica_inversa(Coordenadas coord)
-{  
-  // INSTRUCCIONES:
-  //    - La variable "ang" tiene dos elementos: a, b.
-  //    - Lo que debes hacer es implementar las ecuaciones de la cinemática
-  //      inversa que aparecen en las diapositivas.
-  //    - Para ello, sólo debes asignar valor a las variables a, b de la estructura "ang".
-  //    - Para darles valor solo tienes que hacer:
-  //        ang.a = loquesea;
-  //        ang.b = loquesea;
-  //
-  
+{
   Angulos ang;
-  
-  /* PROGRAMAR DESDE AQUÍ...*/
-
-
-  
-  /* ...HASTA AQUÍ*/
-  
+  ang.a = RAD2DEG * atan(coord.y / coord.x);
+  ang.b = RAD2DEG * asin(( coord.z - L1 ) / L2 );
   return ang;
 }
 
@@ -95,7 +65,7 @@ void setup()
 	servo_garra.attach(SERVO_GARRA);
 	Serial.println("\t\t...");
 
-	Serial.println("Programa Inicializado yeiii\n");
+	Serial.println("Programa Inicializado yeiii");
 
   Serial.println("Estos son los distintos modo de operacion");
   Serial.println("\tModo 1: Mover con Cinematica Directa.");
@@ -157,6 +127,8 @@ void loop()
 			default:
 				Serial.println("No eres muy listo tu... Elige otro numero");
 			break;
-		}	
+		}
+
+	
 	}
 }
