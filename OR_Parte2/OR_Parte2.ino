@@ -61,23 +61,21 @@ void setup()
 
 void loop()
 {
-
-//En esta segunda parte, vamos a programar el brazo para que haga un simple PICK&PLACE
-
-//PICK&PLACE, como su nombre indica, coge un objeto en un punto, y lo deja en otro. Este ciclo
-//se repite indefinidamente
-
-//Elegiremos para los puntos de pick y de place los puntos (90, 0) y (0, 0), respectivamente
-//Podeis hacer todas las florituras que querais con el brazo, sed creativos!
-
-//No os olvideis de los delays entre movimientos, que los movimientos no son instantaneos!!
-
-/* PROGRAMAR DESDE AQUÍ...*/
-
-
+  //En esta segunda parte, vamos a programar el brazo para que haga un simple PICK&PLACE
   
-/* ...HASTA AQUÍ*/
-
-delay(3000);
-
+  //PICK&PLACE, como su nombre indica, coge un objeto en un punto, y lo deja en otro. Este ciclo
+  //se repite indefinidamente
+  
+  //Elegiremos para los puntos de pick y de place los puntos (90, 0) y (0, 0), respectivamente
+  //Podeis hacer todas las florituras que querais con el brazo, sed creativos!
+  
+  //No os olvideis de los delays entre movimientos, que los movimientos no son instantaneos!!
+  
+  /* PROGRAMAR DESDE AQUÍ...*/
+  
+  
+    
+  /* ...HASTA AQUÍ*/
+  
+  delay(3000);
 }
