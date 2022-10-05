@@ -50,11 +50,12 @@ Angulos cinematica_inversa(Coordenadas coord)
 
 void setup()
 {
-	Serial.println("Inicializando programa");
-	
-	Serial.begin(9600);
+
+  Serial.begin(9600);
 	Serial.setTimeout(10000);
 
+	Serial.println("Inicializando programa");	
+	
 	servo_base.attach(SERVO_BASE);
 	Serial.println("\t\t...");
 	
@@ -65,16 +66,16 @@ void setup()
 	Serial.println("\t\t...");
 
 	Serial.println("Programa Inicializado yeiii");
-}
 
-void loop()
-{
   Serial.println("Estos son los distintos modo de operacion");
   Serial.println("\tModo 1: Mover con Cinematica Directa.");
   Serial.println("\tModo 2: Mover con Cinematica Inversa.");
   Serial.println("\tModo 3: Control de la garra.");
-  Serial.print("Elija el modo de operacion: ");	  
+  Serial.print("Elija el modo de operacion: ");	
+}
 
+void loop()
+{
   if (Serial.available())
 	{
 		switch(Serial.read())
@@ -89,6 +90,9 @@ void loop()
 
 				coord = cinematica_directa(ang);
         mover(ang);
+
+        Serial.println("Elija otro modo de operacion: ");
+        
 			break;
 
 			case '2':		
@@ -104,6 +108,9 @@ void loop()
 				ang = cinematica_inversa(coord);	
 
         mover(ang);
+
+        Serial.println("Elija otro modo de operacion: ");
+
 			break;
 
 			case '3':
@@ -112,6 +119,9 @@ void loop()
 				bool c = Serial.parseInt();
 
 				garra(c);
+
+        Serial.println("Elija otro modo de operacion: ");
+        
 			break;
 
 			default:
