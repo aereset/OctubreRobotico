@@ -50,85 +50,158 @@ Angulos cinematica_inversa(Coordenadas coord)
 
 void setup()
 {
-
   Serial.begin(9600);
-	Serial.setTimeout(10000);
 
-	Serial.println("Inicializando programa");	
-	
 	servo_base.attach(SERVO_BASE);
-	Serial.println("\t\t...");
-	
 	servo_hombro.attach(SERVO_HOMBRO);
-	Serial.println("\t\t...");
-	
 	servo_garra.attach(SERVO_GARRA);
-	Serial.println("\t\t...");
-
-	Serial.println("Programa Inicializado yeiii");
-
-  Serial.println("Estos son los distintos modo de operacion");
-  Serial.println("\tModo 1: Mover con Cinematica Directa.");
-  Serial.println("\tModo 2: Mover con Cinematica Inversa.");
-  Serial.println("\tModo 3: Control de la garra.");
-  Serial.print("Elija el modo de operacion: ");	
+	
 }
 
 void loop()
 {
-  if (Serial.available())
-	{
-		switch(Serial.read())
-		{
-			case '1':		
-				Serial.println("Modo Cinematica Directa.\n");
 
-				Serial.println("Introduzca el angulo a: ");
-				ang.a = Serial.parseFloat();
-				Serial.println("Introduzca el angulo b: ");
-				ang.b = Serial.parseFloat();
+//PUNTO INICIAL (0, 0)
+  ang.a = 0;
+  ang.b = 0;
+  bool apertura_garra = true;
 
-				coord = cinematica_directa(ang);
-        mover(ang);
+  coord = cinematica_directa(ang);
 
-        Serial.println("Elija otro modo de operacion: ");
-        
-			break;
+  garra(apertura_garra);
+  mover(ang);
 
-			case '2':		
-				Serial.println("Modo Cinematica Inversa.\n");
-				
-				Serial.println("Introduzca la coordenada x: ");
-				coord.x = Serial.parseFloat();
-				Serial.println("Introduzca la coordenada y: ");
-				coord.y = Serial.parseFloat();
-				Serial.println("Introduzca la coordenada z: ");
-				coord.z = Serial.parseFloat();
+  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+  
+  delay(2000);
 
-				ang = cinematica_inversa(coord);	
+//PUNTO 1 (0, 90)
 
-        mover(ang);
+  ang.a = 0;
+  ang.b = 90;
+  apertura_garra = true;
 
-        Serial.println("Elija otro modo de operacion: ");
+  coord = cinematica_directa(ang);
 
-			break;
+  garra(apertura_garra);
+  mover(ang);
 
-			case '3':
-				Serial.println("Quieres cerrar (0) o abrir (1) la garra? ");
-				
-				bool c = Serial.parseInt();
+  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+  
+  delay(2000);
 
-				garra(c);
+//PUNTO 3 (90, 90)
 
-        Serial.println("Elija otro modo de operacion: ");
-        
-			break;
+  ang.a = 90;
+  ang.b = 90;
+  apertura_garra = true;
 
-			default:
-				Serial.println("No eres muy listo tu... Elige otro numero");
-			break;
-		}
+  coord = cinematica_directa(ang);
 
-	
-	}
+  garra(apertura_garra);
+  mover(ang);
+
+  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+  
+  delay(2000);
+
+//CERRAMOS GARRA
+
+  apertura_garra = false;
+
+  garra(apertura_garra);
+
+  delay(4000);
+
+//PUNTO 4 (90, 0)
+
+  ang.a = 90;
+  ang.b = 0;
+  apertura_garra = false;
+
+  coord = cinematica_directa(ang);
+
+  garra(apertura_garra);
+  mover(ang);
+
+  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+  
+  delay(2000);
+
+//PUNTO 5 (0,0)
+
+  ang.a = 0;
+  ang.b = 0;
+  apertura_garra = false;
+
+  coord = cinematica_directa(ang);
+
+  garra(apertura_garra);
+  mover(ang);
+
+  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+  
+  delay(2000);
+
+//PUNTO 6 (0, 180)
+
+  ang.a = 0;
+  ang.b = 180;
+  apertura_garra = false;
+
+  coord = cinematica_directa(ang);
+
+  garra(apertura_garra);
+  mover(ang);
+
+  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+  
+  delay(2000);
+
+//PUNTO 7 (180, 180)
+
+  ang.a = 180;
+  ang.b = 180;
+  apertura_garra = false;
+
+  coord = cinematica_directa(ang);
+
+  garra(apertura_garra);
+  mover(ang);
+
+  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+  
+  delay(2000);
+
+//ABRIMOS GARRA
+
+  apertura_garra = true;
+
+  garra(apertura_garra);
+
+  delay(4000);
+
+//PUNTO FINAL (0, 0)
+
+  ang.a = 0;
+  ang.b = 0;
+  apertura_garra = true;
+
+  coord = cinematica_directa(ang);
+
+  garra(apertura_garra);
+  mover(ang);
+
+  Serial.println("Coordenadas actuales: " + String(coord.x) + ", " + String(coord.y) + ", " + String(coord.z));
+  
+  delay(5000);
+
+
+
+
+
+
+ //  Serial.print("Coordenadas actuales: " , coord.x , ", " , coord.y , ", " , coord.z);
+  
+
 }
