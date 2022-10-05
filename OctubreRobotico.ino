@@ -69,14 +69,14 @@ void setup()
 
 void loop()
 {
-	if (Serial.available())
-	{
-		Serial.println("Estos son los distintos modo de operacion");
-		Serial.println("\tModo 1: Mover con Cinematica Directa.");
-		Serial.println("\tModo 2: Mover con Cinematica Inversa.");
-		Serial.println("\tModo 3: Control de la garra.");
-		Serial.print("Elija el modo de operacion: ");	  
+  Serial.println("Estos son los distintos modo de operacion");
+  Serial.println("\tModo 1: Mover con Cinematica Directa.");
+  Serial.println("\tModo 2: Mover con Cinematica Inversa.");
+  Serial.println("\tModo 3: Control de la garra.");
+  Serial.print("Elija el modo de operacion: ");	  
 
+  if (Serial.available())
+	{
 		switch(Serial.read())
 		{
 			case '1':		
@@ -88,6 +88,7 @@ void loop()
 				ang.b = Serial.parseFloat();
 
 				coord = cinematica_directa(ang);
+        mover(ang);
 			break;
 
 			case '2':		
@@ -100,7 +101,9 @@ void loop()
 				Serial.println("Introduzca la coordenada z: ");
 				coord.z = Serial.parseFloat();
 
-				ang = cinematica_inversa(coord);		  
+				ang = cinematica_inversa(coord);	
+
+        mover(ang);
 			break;
 
 			case '3':
@@ -116,6 +119,6 @@ void loop()
 			break;
 		}
 
-		mover(ang);
+	
 	}
 }
